@@ -66,7 +66,6 @@ public class ZooKeeperServerMain {
         LOG.info("Exiting normally");
         System.exit(0);
     }
-
     protected void initializeAndRun(String[] args)
         throws ConfigException, IOException
     {
@@ -75,7 +74,14 @@ public class ZooKeeperServerMain {
         } catch (JMException e) {
             LOG.warn("Unable to register log4j JMX control", e);
         }
-
+        /*
+        *   四个参数设置
+        *   clientPortAddress
+            dataDir
+            dataLogDir=dataDir
+            tickTime
+            maxClientCnxns;
+         */
         ServerConfig config = new ServerConfig();
         if (args.length == 1) {
             config.parse(args[0]);
@@ -100,7 +106,7 @@ public class ZooKeeperServerMain {
             // run() in this thread.
             // create a file logger url from the command line args
             ZooKeeperServer zkServer = new ZooKeeperServer();
-
+            LOG.info("dataLogDir:{},dataDir:{}",config.dataLogDir,config.dataDir);
             txnLog = new FileTxnSnapLog(new File(config.dataLogDir), new File(
                     config.dataDir));
             zkServer.setTxnLogFactory(txnLog);

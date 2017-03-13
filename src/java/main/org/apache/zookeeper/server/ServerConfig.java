@@ -26,8 +26,9 @@ import org.apache.zookeeper.server.quorum.QuorumPeerConfig.ConfigException;
 
 /**
  * Server configuration storage.
- *
+ * 服务配置存储
  * We use this instead of Properties as it's typed.
+ * 使用javaConfig来代替properties文件
  *
  */
 public class ServerConfig {
@@ -35,10 +36,12 @@ public class ServerConfig {
     //// If you update the configuration parameters be sure
     //// to update the "conf" 4letter word
     ////
+    // 客户端端口地址
     protected InetSocketAddress clientPortAddress;
     protected String dataDir;
     protected String dataLogDir;
     protected int tickTime = ZooKeeperServer.DEFAULT_TICK_TIME;
+    //最大连接数限制
     protected int maxClientCnxns;
     /** defaults to -1 if not set explicitly */
     protected int minSessionTimeout = -1;
